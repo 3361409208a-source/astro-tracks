@@ -4,7 +4,7 @@
     <div v-if="result" class="result-section glass-panel">
       <div class="result-header">
         <div class="header-left">
-          <Sparkles class="icon-purple" :size="20" />
+          <Sparkles class="icon-sky" :size="20" />
           <h3>占卜结果</h3>
         </div>
         <button class="btn-glass" @click="reset">
@@ -242,6 +242,9 @@ const reset = () => {
   font-size: 1.5rem;
   color: white;
   margin-bottom: 6px;
+  background: linear-gradient(135deg, #f8fafc 0%, #38bdf8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .section-title p {
@@ -280,8 +283,9 @@ const reset = () => {
 
 .shuffling-indicator {
   font-size: 1.1rem;
-  color: #c084fc;
+  color: #fbbf24;
   margin-bottom: 24px;
+  text-shadow: 0 0 10px rgba(251, 191, 36, 0.4);
 }
 
 .deck-cards {
@@ -298,9 +302,9 @@ const reset = () => {
   width: 100%;
   height: 100%;
   border-radius: 8px;
-  background: linear-gradient(135deg, #2e1065 0%, #0f052d 100%);
-  border: 1.5px solid rgba(168, 85, 247, 0.4);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  background: linear-gradient(135deg, #090e1a 0%, #020408 100%);
+  border: 1.5px solid rgba(56, 189, 248, 0.35);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
   animation: shuffle 1.5s ease-in-out infinite;
 }
 
@@ -326,8 +330,8 @@ const reset = () => {
   width: 60px;
   height: 90px;
   border-radius: 6px;
-  background: linear-gradient(135deg, #1e1b4b 0%, #311042 100%);
-  border: 1px solid rgba(236, 72, 153, 0.3);
+  background: linear-gradient(135deg, #090e1a 0%, #020408 100%);
+  border: 1px solid rgba(56, 189, 248, 0.25);
   opacity: 0.8;
 }
 
@@ -383,6 +387,10 @@ const reset = () => {
   color: white;
 }
 
+.icon-sky {
+  color: #38bdf8;
+}
+
 .question-quote {
   display: flex;
   gap: 12px;
@@ -395,9 +403,9 @@ const reset = () => {
 
 .quote-label {
   font-size: 0.8rem;
-  background: rgba(168, 85, 247, 0.2);
-  color: #c084fc;
-  border: 1px solid rgba(168, 85, 247, 0.3);
+  background: rgba(56, 189, 248, 0.15);
+  color: #38bdf8;
+  border: 1px solid rgba(56, 189, 248, 0.25);
   padding: 1px 6px;
   border-radius: 4px;
   font-weight: 600;
@@ -427,35 +435,45 @@ const reset = () => {
 }
 
 .card-display {
-  padding: 16px;
+  padding: 20px 16px;
   background: rgba(255, 255, 255, 0.015);
   display: flex;
   flex-direction: column;
   align-items: center;
+  perspective: 1000px;
 }
 
 .card-timeline {
   font-size: 0.75rem;
   font-weight: 600;
-  color: #a855f7;
+  color: #fbbf24;
   text-transform: uppercase;
   margin-bottom: 12px;
+  letter-spacing: 1px;
 }
 
 .card-visual {
   width: 90px;
   height: 135px;
   border-radius: 8px;
-  background: linear-gradient(135deg, #1e1b4b 0%, #030712 100%);
-  border: 1.5px solid rgba(168, 85, 247, 0.3);
+  background: linear-gradient(135deg, #090e1a 0%, #020408 100%);
+  border: 1.5px solid rgba(56, 189, 248, 0.25);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: 10px;
   text-align: center;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.6);
   margin-bottom: 16px;
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  transform-style: preserve-3d;
+}
+
+.card-display:hover .card-visual {
+  transform: translateY(-8px) rotateY(15deg) scale(1.06);
+  border-color: rgba(251, 191, 36, 0.6);
+  box-shadow: 0 15px 30px rgba(251, 191, 36, 0.25);
 }
 
 .card-symbol {
@@ -508,7 +526,7 @@ const reset = () => {
   display: flex;
   align-items: center;
   gap: 6px;
-  border-left: 3px solid #ec4899;
+  border-left: 3px solid #fbbf24;
   padding-left: 8px;
 }
 

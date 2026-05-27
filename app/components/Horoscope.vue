@@ -59,7 +59,7 @@
         <!-- 幸运要素 -->
         <div class="lucky-grid">
           <div class="lucky-card">
-            <Sparkles class="lucky-icon pink" :size="18" />
+            <Sparkles class="lucky-icon cyan" :size="18" />
             <div>
               <span class="lucky-title">幸运颜色</span>
               <span class="lucky-value">{{ result.luckyColor }}</span>
@@ -254,6 +254,9 @@ const reset = () => {
   font-size: 1.5rem;
   color: white;
   margin-bottom: 6px;
+  background: linear-gradient(135deg, #f8fafc 0%, #38bdf8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .section-title p {
@@ -280,17 +283,23 @@ const reset = () => {
 }
 
 .sign-card.active {
-  background: rgba(168, 85, 247, 0.1);
-  border-color: rgba(168, 85, 247, 0.4);
-  box-shadow: 0 0 20px rgba(168, 85, 247, 0.15);
+  background: rgba(56, 189, 248, 0.08);
+  border-color: rgba(56, 189, 248, 0.4);
+  box-shadow: 0 0 20px rgba(56, 189, 248, 0.2);
 }
 
 .sign-icon {
   font-size: 2rem;
   margin-bottom: 6px;
-  background: linear-gradient(135deg, #a855f7, #ec4899);
+  background: linear-gradient(135deg, #38bdf8, #fbbf24);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.sign-card:hover .sign-icon {
+  transform: scale(1.18) rotate(8deg);
+  filter: drop-shadow(0 0 8px rgba(56, 189, 248, 0.6));
 }
 
 .sign-name {
@@ -334,7 +343,7 @@ const reset = () => {
 
 .period-btn.active {
   background: rgba(255, 255, 255, 0.08);
-  color: white;
+  color: #38bdf8;
 }
 
 .btn-predict {
@@ -366,13 +375,13 @@ const reset = () => {
   position: absolute;
   width: 100%;
   height: 100%;
-  border: 2px dashed rgba(168, 85, 247, 0.3);
+  border: 2px dashed rgba(56, 189, 248, 0.3);
   border-radius: 50%;
   animation: spin 15s linear infinite;
 }
 
 .loading-icon-animate {
-  color: #a855f7;
+  color: #38bdf8;
   animation: pulse 2s ease-in-out infinite;
 }
 
@@ -390,7 +399,7 @@ const reset = () => {
 /* 结果渲染 */
 .result-section {
   padding: 24px;
-  background: rgba(15, 15, 35, 0.7);
+  background: rgba(10, 25, 47, 0.25);
 }
 
 .result-header {
@@ -411,7 +420,7 @@ const reset = () => {
 .sign-symbol {
   font-size: 2.2rem;
   line-height: 1;
-  background: linear-gradient(135deg, #a855f7, #ec4899);
+  background: linear-gradient(135deg, #38bdf8, #fbbf24);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -423,9 +432,9 @@ const reset = () => {
 
 .period-tag {
   font-size: 0.75rem;
-  background: rgba(168, 85, 247, 0.15);
-  color: #c084fc;
-  border: 1px solid rgba(168, 85, 247, 0.2);
+  background: rgba(56, 189, 248, 0.12);
+  color: #38bdf8;
+  border: 1px solid rgba(56, 189, 248, 0.2);
   padding: 2px 8px;
   border-radius: 6px;
   margin-top: 2px;
@@ -449,7 +458,7 @@ const reset = () => {
 }
 
 .index-item {
-  background: rgba(255, 255, 255, 0.02);
+  background: rgba(255, 255, 255, 0.015);
   border: 1px solid rgba(255, 255, 255, 0.04);
   padding: 16px;
   border-radius: 12px;
@@ -472,6 +481,7 @@ const reset = () => {
 .star-filled {
   color: #fbbf24;
   fill: #fbbf24;
+  filter: drop-shadow(0 0 4px rgba(251, 191, 36, 0.6));
 }
 
 .star-empty {
@@ -490,7 +500,7 @@ const reset = () => {
   align-items: center;
   gap: 12px;
   padding: 16px;
-  background: rgba(255, 255, 255, 0.02);
+  background: rgba(255, 255, 255, 0.015);
   border: 1px solid rgba(255, 255, 255, 0.04);
   border-radius: 12px;
 }
@@ -500,14 +510,14 @@ const reset = () => {
   border-radius: 8px;
 }
 
-.lucky-icon.pink {
-  color: #ec4899;
-  background: rgba(236, 72, 153, 0.1);
+.lucky-icon.cyan {
+  color: #06b6d4;
+  background: rgba(6, 182, 212, 0.1);
 }
 
 .lucky-icon.amber {
-  color: #f59e0b;
-  background: rgba(245, 158, 11, 0.1);
+  color: #fbbf24;
+  background: rgba(251, 191, 36, 0.1);
 }
 
 .lucky-title {
@@ -524,8 +534,8 @@ const reset = () => {
 
 .details-card {
   padding: 20px;
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.015);
+  border: 1px solid rgba(255, 255, 255, 0.04);
   border-radius: 12px;
 }
 
@@ -534,7 +544,7 @@ const reset = () => {
   color: white;
   margin-bottom: 8px;
   font-weight: 600;
-  border-left: 3px solid #a855f7;
+  border-left: 3px solid #38bdf8;
   padding-left: 8px;
 }
 

@@ -4,7 +4,7 @@
       <div class="modal-content glass-panel">
         <div class="modal-header">
           <div class="header-title">
-            <Key class="icon-purple" :size="22" />
+            <Key class="icon-sky" :size="22" />
             <h2>API 密钥配置</h2>
           </div>
           <button class="btn-close" @click="$emit('close')">
@@ -178,8 +178,8 @@ const clearConfig = () => {
   gap: 10px;
 }
 
-.icon-purple {
-  color: #a855f7;
+.icon-sky {
+  color: #38bdf8;
 }
 
 .modal-header h2 {
@@ -261,13 +261,13 @@ const clearConfig = () => {
 }
 
 .link-highlight {
-  color: #a855f7;
+  color: #38bdf8;
   text-decoration: none;
-  border-bottom: 1px dashed rgba(168, 85, 247, 0.4);
+  border-bottom: 1px dashed rgba(56, 189, 248, 0.4);
 }
 
 .link-highlight:hover {
-  color: #c084fc;
+  color: #7dd3fc;
   border-bottom-style: solid;
 }
 

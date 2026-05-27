@@ -1,6 +1,16 @@
 <template>
   <div class="app-layout">
-    <!-- 背景流光装饰 (丰富设计美学) -->
+    <!-- 动态繁星背景 (增强星空神秘美感) -->
+    <div class="stars-bg">
+      <div 
+        v-for="star in starDots" 
+        :key="star.id" 
+        class="star-dot" 
+        :style="star.style"
+      ></div>
+    </div>
+
+    <!-- 背景极光微光装饰 -->
     <div class="decor-glow glow-1"></div>
     <div class="decor-glow glow-2"></div>
 
@@ -106,6 +116,7 @@ import ApiKeyModal from './components/ApiKeyModal.vue'
 const isSettingsOpen = ref(false)
 const hasApiKey = ref(false)
 const currentTab = ref('horoscope')
+const starDots = ref([])
 
 const tabs = [
   { label: '星座运势', value: 'horoscope', icon: Star },
@@ -113,7 +124,7 @@ const tabs = [
   { label: '生辰八字', value: 'bazi', icon: Compass }
 ]
 
-// 动态组件映射 (使用 shallowRef 防止把组件实例深度响应式化提升性能)
+// 动态组件映射
 const componentsMap = {
   horoscope: Horoscope,
   tarot: Tarot,
@@ -135,7 +146,17 @@ const checkApiKey = () => {
 onMounted(() => {
   checkApiKey()
   
-  // 如果没有 API Key，主动给个温和的提示并打开弹窗
+  // 生成 35 颗带有随机位置和时间周期的闪烁繁星
+  starDots.value = Array.from({ length: 35 }, (_, i) => ({
+    id: i,
+    style: {
+      top: `${Math.random() * 100}%`,
+      left: `${Math.random() * 100}%`,
+      animationDelay: `${Math.random() * 5}s`,
+      animationDuration: `${2.5 + Math.random() * 3}s`
+    }
+  }))
+
   if (!hasApiKey.value) {
     setTimeout(() => {
       isSettingsOpen.value = true
@@ -158,28 +179,48 @@ const onConfigSaved = () => {
   padding: 24px;
 }
 
-/* 背景发光球 */
+/* 繁星定位背景 */
+.stars-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+}
+
+:deep(.star-dot) {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: white;
+  border-radius: 50%;
+  animation: twinkle infinite ease-in-out;
+}
+
+/* 背景极光微光 */
 .decor-glow {
   position: absolute;
   border-radius: 50%;
-  filter: blur(120px);
-  z-index: -1;
+  filter: blur(140px);
+  z-index: -2;
   pointer-events: none;
-  opacity: 0.25;
+  opacity: 0.15;
 }
 
 .glow-1 {
   width: 400px;
   height: 400px;
-  background: radial-gradient(circle, #6366f1 0%, transparent 70%);
+  background: radial-gradient(circle, #0891b2 0%, transparent 70%);
   top: -100px;
   right: -50px;
 }
 
 .glow-2 {
-  width: 500px;
-  height: 500px;
-  background: radial-gradient(circle, #a855f7 0%, transparent 70%);
+  width: 550px;
+  height: 550px;
+  background: radial-gradient(circle, #0284c7 0%, transparent 70%);
   bottom: -150px;
   left: -100px;
 }
@@ -193,7 +234,8 @@ const onConfigSaved = () => {
   align-items: center;
   justify-content: space-between;
   padding: 16px 28px;
-  background: rgba(13, 13, 30, 0.4);
+  background: rgba(10, 25, 47, 0.25);
+  border: 1px solid rgba(56, 189, 248, 0.08);
 }
 
 .logo-area {
@@ -203,22 +245,22 @@ const onConfigSaved = () => {
 }
 
 .logo-icon {
-  color: #a855f7;
-  animation: logoSpin 20s linear infinite;
+  color: #38bdf8;
+  animation: logoSpin 25s linear infinite;
 }
 
 .logo-area h1 {
   font-size: 1.3rem;
   font-weight: 700;
-  color: white;
+  color: #f8fafc;
   letter-spacing: 1px;
 }
 
 .version-badge {
   font-size: 0.65rem;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  color: #94a3b8;
+  background: rgba(56, 189, 248, 0.08);
+  border: 1px solid rgba(56, 189, 248, 0.12);
+  color: #38bdf8;
   padding: 1px 6px;
   border-radius: 4px;
 }
@@ -260,22 +302,23 @@ const onConfigSaved = () => {
 }
 
 .btn-settings {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(56, 189, 248, 0.12);
   color: #94a3b8;
   padding: 8px;
   border-radius: 10px;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .btn-settings:hover {
-  background: rgba(255, 255, 255, 0.1);
-  color: white;
+  background: rgba(56, 189, 248, 0.1);
+  color: #f8fafc;
   transform: rotate(45deg);
+  box-shadow: 0 0 12px rgba(56, 189, 248, 0.3);
 }
 
 /* 主体容器 */
@@ -298,6 +341,9 @@ const onConfigSaved = () => {
   font-weight: 700;
   color: white;
   margin-bottom: 10px;
+  background: linear-gradient(135deg, #f8fafc 0%, #38bdf8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .welcome-banner p {
@@ -315,7 +361,8 @@ const onConfigSaved = () => {
   margin: 0 auto 36px;
   display: flex;
   padding: 6px;
-  background: rgba(13, 13, 30, 0.3);
+  background: rgba(10, 25, 47, 0.2);
+  border: 1px solid rgba(56, 189, 248, 0.06);
 }
 
 .tab-btn {
@@ -332,13 +379,18 @@ const onConfigSaved = () => {
   align-items: center;
   justify-content: center;
   gap: 8px;
-  transition: all 0.25s ease;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.tab-btn:hover {
+  color: #38bdf8;
 }
 
 .tab-btn.active {
-  background: rgba(255, 255, 255, 0.06);
-  color: white;
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: rgba(56, 189, 248, 0.08);
+  color: #38bdf8;
+  border: 1px solid rgba(56, 189, 248, 0.15);
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.05);
 }
 
 /* 密钥提醒 Banner */
@@ -351,8 +403,9 @@ const onConfigSaved = () => {
 }
 
 .banner-icon {
-  color: #a855f7;
+  color: #38bdf8;
   margin-bottom: 16px;
+  animation: logoPulse 2s ease-in-out infinite;
 }
 
 .key-banner h3 {
@@ -382,13 +435,18 @@ const onConfigSaved = () => {
   text-align: center;
   padding: 40px 0 12px;
   font-size: 0.8rem;
-  color: #475569;
+  color: #334155;
 }
 
-/* 旋转 */
+/* 旋转与呼吸动效 */
 @keyframes logoSpin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
+}
+
+@keyframes logoPulse {
+  0%, 100% { transform: scale(1); opacity: 0.8; }
+  50% { transform: scale(1.08); opacity: 1; filter: drop-shadow(0 0 10px rgba(56, 189, 248, 0.3)); }
 }
 
 @media (max-width: 640px) {

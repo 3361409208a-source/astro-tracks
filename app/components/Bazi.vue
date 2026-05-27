@@ -35,7 +35,7 @@
         <!-- 详细批示网格 -->
         <div class="bazi-details-grid">
           <div class="detail-block">
-            <div class="block-title font-purple">
+            <div class="block-title font-sky">
               <span>☯</span> 性格特质
             </div>
             <p>{{ result.personality }}</p>
@@ -260,6 +260,9 @@ const reset = () => {
   font-size: 1.5rem;
   color: white;
   margin-bottom: 6px;
+  background: linear-gradient(135deg, #f8fafc 0%, #38bdf8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .section-title p {
@@ -341,7 +344,7 @@ const reset = () => {
   font-size: 4.5rem;
   line-height: 1;
   margin-bottom: 24px;
-  animation: yinYangSpin 3s linear infinite;
+  animation: yinYangSpin 3s linear infinite, yinYangGlow 2s ease-in-out infinite;
   background: linear-gradient(135deg, #f59e0b, #d97706);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -485,7 +488,7 @@ const reset = () => {
   line-height: 1.6;
 }
 
-.font-purple { color: #c084fc; }
+.font-sky { color: #38bdf8; }
 .font-amber { color: #fbbf24; }
 .font-rose { color: #f43f5e; }
 .font-emerald { color: #34d399; }
@@ -537,5 +540,10 @@ const reset = () => {
 @keyframes yinYangSpin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
+}
+
+@keyframes yinYangGlow {
+  0%, 100% { filter: drop-shadow(0 0 5px rgba(245, 158, 11, 0.4)); }
+  50% { filter: drop-shadow(0 0 18px rgba(245, 158, 11, 0.85)); }
 }
 </style>
