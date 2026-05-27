@@ -259,7 +259,7 @@ const reset = () => {
 }
 
 .section-title p {
-  color: #94a3b8;
+  color: #ffffff;
   font-size: 0.8rem;
 }
 

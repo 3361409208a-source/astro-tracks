@@ -391,7 +391,7 @@ const onConfigSaved = () => {
 
 .welcome-banner p {
   font-size: 0.8rem;
-  color: #94a3b8;
+  color: #ffffff;
   max-width: 500px;
   margin: 0 auto;
   line-height: 1.5;
@@ -598,7 +598,7 @@ const onConfigSaved = () => {
 
 .loading-subtitle {
   font-size: 0.85rem;
-  color: #94a3b8;
+  color: #ffffff;
   height: 20px;
   line-height: 20px;
   letter-spacing: 1px;
