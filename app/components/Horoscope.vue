@@ -108,7 +108,7 @@
           :class="{ active: selectedSign === sign.name }"
           @click="selectedSign = sign.name"
         >
-          <span class="sign-icon">{{ sign.symbol }}</span>
+          <img :src="sign.image" :alt="sign.name" class="sign-icon" />
           <span class="sign-name">{{ sign.name }}</span>
           <span class="sign-date">{{ sign.date }}</span>
         </div>
@@ -171,18 +171,18 @@ const periodText = computed(() => {
 })
 
 const signs = [
-  { name: '白羊座', symbol: '♈', date: '3.21-4.19' },
-  { name: '金牛座', symbol: '♉', date: '4.20-5.20' },
-  { name: '双子座', symbol: '♊', date: '5.21-6.21' },
-  { name: '巨蟹座', symbol: '♋', date: '6.22-7.22' },
-  { name: '狮子座', symbol: '♌', date: '7.23-8.22' },
-  { name: '处女座', symbol: '♍', date: '8.23-9.22' },
-  { name: '天秤座', symbol: '♎', date: '9.23-10.23' },
-  { name: '天蝎座', symbol: '♏', date: '10.24-11.22' },
-  { name: '射手座', symbol: '♐', date: '11.23-12.21' },
-  { name: '摩羯座', symbol: '♑', date: '12.22-1.19' },
-  { name: '水瓶座', symbol: '♒', date: '1.20-2.18' },
-  { name: '双鱼座', symbol: '♓', date: '2.19-3.20' }
+  { name: '白羊座', symbol: '♈', date: '3.21-4.19', image: '/bg/images/images/未标题-1_01.png' },
+  { name: '金牛座', symbol: '♉', date: '4.20-5.20', image: '/bg/images/images/未标题-1_02.png' },
+  { name: '双子座', symbol: '♊', date: '5.21-6.21', image: '/bg/images/images/未标题-1_03.png' },
+  { name: '巨蟹座', symbol: '♋', date: '6.22-7.22', image: '/bg/images/images/未标题-1_04.png' },
+  { name: '狮子座', symbol: '♌', date: '7.23-8.22', image: '/bg/images/images/未标题-1_05.png' },
+  { name: '处女座', symbol: '♍', date: '8.23-9.22', image: '/bg/images/images/未标题-1_06.png' },
+  { name: '天秤座', symbol: '♎', date: '9.23-10.23', image: '/bg/images/images/未标题-1_07.png' },
+  { name: '天蝎座', symbol: '♏', date: '10.24-11.22', image: '/bg/images/images/未标题-1_08.png' },
+  { name: '射手座', symbol: '♐', date: '11.23-12.21', image: '/bg/images/images/未标题-1_09.png' },
+  { name: '摩羯座', symbol: '♑', date: '12.22-1.19', image: '/bg/images/images/未标题-1_10.png' },
+  { name: '水瓶座', symbol: '♒', date: '1.20-2.18', image: '/bg/images/images/未标题-1_11.png' },
+  { name: '双鱼座', symbol: '♓', date: '2.19-3.20', image: '/bg/images/images/未标题-1_12.png' }
 ]
 
 const getSignSymbol = (name) => {
@@ -247,38 +247,42 @@ const reset = () => {
 
 .section-title {
   text-align: center;
-  margin-bottom: 24px;
+  margin-bottom: 12px;
 }
 
 .section-title h2 {
-  font-size: 1.35rem;
-  color: #f1f5f9;
+  font-size: 1.1rem;
+  color: #ffffff;
   letter-spacing: 1px;
   font-weight: 500;
-  margin-bottom: 6px;
+  margin-bottom: 4px;
 }
 
 .section-title p {
-  color: #64748b;
-  font-size: 0.9rem;
+  color: #94a3b8;
+  font-size: 0.8rem;
 }
 
 /* 星座网格 */
 .signs-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 12px;
-  margin-bottom: 20px;
+  gap: 8px;
+  margin-bottom: 12px;
 }
 
 .sign-card {
-  padding: 16px;
+  padding: 12px 8px 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   cursor: pointer;
   text-align: center;
+  min-height: 120px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
 }
 
 .sign-card.active {
@@ -288,31 +292,39 @@ const reset = () => {
 }
 
 .sign-icon {
-  font-size: 1.8rem;
-  margin-bottom: 6px;
-  color: #475569;
+  display: block;
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+  margin: 0 auto;
   transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.15));
 }
 
 .sign-card.active .sign-icon {
-  color: #c5a880;
+  filter: drop-shadow(0 0 8px rgba(197, 168, 128, 0.5));
 }
 
 .sign-card:hover .sign-icon {
-  transform: translateY(-2px);
-  color: #c5a880;
+  transform: translateY(-3px) scale(1.08);
 }
 
 .sign-name {
   font-weight: 600;
-  color: white;
-  font-size: 0.95rem;
+  color: #ffffff;
+  font-size: 0.85rem;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+  width: 100%;
+  text-align: center;
+  margin-top: 6px;
 }
 
 .sign-date {
-  font-size: 0.75rem;
-  color: #64748b;
-  margin-top: 2px;
+  font-size: 0.65rem;
+  color: #94a3b8;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 6px;
 }
 
 /* 控制栏 */
@@ -320,7 +332,7 @@ const reset = () => {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 16px 20px;
+  padding: 10px 16px;
 }
 
 .period-selector {

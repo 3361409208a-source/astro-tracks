@@ -123,13 +123,21 @@
           </div>
 
           <div class="form-group">
-            <label for="birth-date">出生日期 (公历)</label>
-            <input 
-              type="date" 
-              id="birth-date"
-              v-model="birthDate"
-              class="input-glass"
-            />
+            <label>出生日期 (公历)</label>
+            <div class="date-row">
+              <select v-model="birthYear" class="input-glass select-dark">
+                <option value="">年</option>
+                <option v-for="y in yearsList" :key="y" :value="y">{{ y }}</option>
+              </select>
+              <select v-model="birthMonth" class="input-glass select-dark">
+                <option value="">月</option>
+                <option v-for="m in 12" :key="m" :value="String(m).padStart(2,'0')">{{ m }}月</option>
+              </select>
+              <select v-model="birthDay" class="input-glass select-dark">
+                <option value="">日</option>
+                <option v-for="d in daysInMonth" :key="d" :value="String(d).padStart(2,'0')">{{ d }}日</option>
+              </select>
+            </div>
           </div>
 
           <div class="form-group">
@@ -170,10 +178,27 @@ const emit = defineEmits(['requestSettings'])
 
 const userName = ref('')
 const userGender = ref('男')
-const birthDate = ref('')
+const birthYear = ref('')
+const birthMonth = ref('')
+const birthDay = ref('')
 const birthHour = ref('子时 (23:00-01:00)')
 const loading = ref(false)
 const result = ref(null)
+
+const currentYear = new Date().getFullYear()
+const yearsList = Array.from({ length: 100 }, (_, i) => currentYear - i)
+
+const daysInMonth = computed(() => {
+  if (!birthYear.value || !birthMonth.value) return 31
+  return new Date(Number(birthYear.value), Number(birthMonth.value), 0).getDate()
+})
+
+const birthDate = computed(() => {
+  if (birthYear.value && birthMonth.value && birthDay.value) {
+    return `${birthYear.value}-${birthMonth.value}-${birthDay.value}`
+  }
+  return ''
+})
 
 const hoursList = [
   { label: '子时 (23:00-01:00)', value: '子时 (23:00-01:00)' },
@@ -278,6 +303,16 @@ const reset = () => {
   grid-template-columns: 1fr 1fr;
   gap: 20px;
   margin-bottom: 24px;
+}
+
+.date-row {
+  display: flex;
+  gap: 8px;
+}
+
+.date-row .input-glass {
+  flex: 1;
+  min-width: 0;
 }
 
 .form-group label {

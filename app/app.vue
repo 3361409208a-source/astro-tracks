@@ -8,7 +8,7 @@
         :style="{ backgroundImage: `url(${currentBg})` }"
       />
     </Transition>
-    <!-- 黑色渐变覆盖层 -->
+    <!-- 遮罩层 -->
     <div class="scene-overlay" />
     <!-- 顶部导航栏 -->
     <header class="app-header glass-panel">
@@ -180,24 +180,26 @@ const onConfigSaved = () => {
 /* ── 场景背景图层 ── */
 .scene-bg {
   position: fixed;
-  inset: 0;
-  z-index: 0;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -2;
   background-size: cover;
-  background-position: center;
+  background-position: center top;
   background-repeat: no-repeat;
+  overflow: hidden;
   will-change: opacity;
 }
 
 .scene-overlay {
   position: fixed;
-  inset: 0;
-  z-index: 1;
-  background: linear-gradient(
-    to bottom,
-    rgba(4, 4, 10, 0.72) 0%,
-    rgba(4, 4, 10, 0.55) 40%,
-    rgba(4, 4, 10, 0.80) 100%
-  );
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  background: rgba(0, 0, 0, 0.25);
   pointer-events: none;
 }
 
@@ -218,10 +220,10 @@ const onConfigSaved = () => {
   display: flex;
   flex-direction: column;
   position: relative;
-  z-index: 2;
+  z-index: 0;
   max-width: 1000px;
   margin: 0 auto;
-  padding: 40px 24px;
+  padding: 16px 24px;
 }
 
 /* 顶部导航 */
@@ -229,10 +231,10 @@ const onConfigSaved = () => {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 14px 24px;
+  padding: 10px 20px;
   background: rgba(10, 10, 15, 0.4);
   border: 1px solid rgba(255, 255, 255, 0.03);
-  margin-bottom: 48px;
+  margin-bottom: 20px;
 }
 
 .logo-area {
@@ -320,32 +322,32 @@ const onConfigSaved = () => {
 
 .welcome-banner {
   text-align: center;
-  margin-bottom: 40px;
+  margin-bottom: 16px;
 }
 
 .welcome-banner h2 {
-  font-size: 1.45rem;
+  font-size: 1.2rem;
   font-weight: 500;
-  color: #f1f5f9;
+  color: #ffffff;
   letter-spacing: 2px;
-  margin-bottom: 8px;
+  margin-bottom: 4px;
 }
 
 .welcome-banner p {
-  font-size: 0.85rem;
-  color: #64748b;
+  font-size: 0.8rem;
+  color: #94a3b8;
   max-width: 500px;
   margin: 0 auto;
-  line-height: 1.6;
+  line-height: 1.5;
 }
 
 /* Tab 切换栏 */
 .tab-selector {
   width: 100%;
   max-width: 520px;
-  margin: 0 auto 40px;
+  margin: 0 auto 16px;
   display: flex;
-  padding: 4px;
+  padding: 3px;
   background: rgba(8, 8, 12, 0.4);
   border: 1px solid rgba(255, 255, 255, 0.03);
   border-radius: 8px;
@@ -355,8 +357,8 @@ const onConfigSaved = () => {
   flex: 1;
   background: transparent;
   border: none;
-  color: #64748b;
-  padding: 10px;
+  color: #94a3b8;
+  padding: 7px;
   font-weight: 500;
   font-size: 0.85rem;
   cursor: pointer;
@@ -417,21 +419,21 @@ const onConfigSaved = () => {
 /* 页脚 */
 .app-footer {
   text-align: center;
-  padding: 40px 0 12px;
-  font-size: 0.75rem;
+  padding: 12px 0 8px;
+  font-size: 0.7rem;
   color: #334155;
 }
 
 @media (max-width: 640px) {
   .app-layout {
-    padding: 20px 16px;
+    padding: 12px 16px;
   }
   .app-header {
-    padding: 10px 16px;
-    margin-bottom: 32px;
+    padding: 8px 14px;
+    margin-bottom: 14px;
   }
   .welcome-banner h2 {
-    font-size: 1.2rem;
+    font-size: 1rem;
   }
 }
 </style>
