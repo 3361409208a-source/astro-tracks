@@ -1,5 +1,15 @@
 <template>
   <div class="app-layout">
+    <!-- 动态场景背景图层 -->
+    <Transition name="bg-fade">
+      <div
+        :key="currentTab"
+        class="scene-bg"
+        :style="{ backgroundImage: `url(${currentBg})` }"
+      />
+    </Transition>
+    <!-- 黑色渐变覆盖层 -->
+    <div class="scene-overlay" />
     <!-- 顶部导航栏 -->
     <header class="app-header glass-panel">
       <div class="logo-area">
@@ -106,8 +116,16 @@ import ApiKeyModal from './components/ApiKeyModal.vue'
 
 const isSettingsOpen = ref(false)
 const hasApiKey = ref(false)
-const hasBuiltinKey = ref(false) // 服务端是否内置了密钥
+const hasBuiltinKey = ref(false)
 const currentTab = ref('horoscope')
+
+const bgMap = {
+  horoscope: '/bg/horoscope.png',
+  tarot: '/bg/tarot.png',
+  bazi: '/bg/bazi.png'
+}
+
+const currentBg = computed(() => bgMap[currentTab.value])
 
 const tabs = [
   { label: '星座运势', value: 'horoscope', icon: Star },
@@ -159,11 +177,48 @@ const onConfigSaved = () => {
 </script>
 
 <style scoped>
+/* ── 场景背景图层 ── */
+.scene-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  will-change: opacity;
+}
+
+.scene-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    to bottom,
+    rgba(4, 4, 10, 0.72) 0%,
+    rgba(4, 4, 10, 0.55) 40%,
+    rgba(4, 4, 10, 0.80) 100%
+  );
+  pointer-events: none;
+}
+
+/* 背景切换过渡 */
+.bg-fade-enter-active {
+  transition: opacity 0.9s ease;
+}
+.bg-fade-leave-active {
+  transition: opacity 0.6s ease;
+}
+.bg-fade-enter-from,
+.bg-fade-leave-to {
+  opacity: 0;
+}
+
 .app-layout {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   position: relative;
+  z-index: 2;
   max-width: 1000px;
   margin: 0 auto;
   padding: 40px 24px;
