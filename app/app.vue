@@ -9,14 +9,18 @@
       </div>
 
       <div class="nav-actions">
-        <!-- 未配置密钥时的内敛警告 -->
-        <span v-if="!hasApiKey" class="warning-pill" @click="isSettingsOpen = true">
+        <!-- 服务状态指示 -->
+        <span v-if="hasBuiltinKey" class="success-pill">
+          <ShieldCheck :size="13" />
+          服务就绪
+        </span>
+        <span v-else-if="!hasApiKey" class="warning-pill" @click="isSettingsOpen = true">
           <AlertTriangle :size="13" />
-          未配置密钥
+          需要配置密钥
         </span>
         <span v-else class="success-pill">
           <ShieldCheck :size="13" />
-          服务就绪
+          自定义密钥
         </span>
 
         <button class="btn-settings" @click="isSettingsOpen = true">
@@ -47,26 +51,26 @@
         </button>
       </div>
 
-      <!-- 密钥未配置时的简约大卡片提示 -->
-      <div v-if="!hasApiKey" class="key-banner glass-panel">
+      <!-- 密钥未配置时的简约大卡片提示（没有内置密钥且用户也没设置时才显示） -->
+      <div v-if="!hasBuiltinKey && !hasApiKey" class="key-banner glass-panel">
         <Key class="banner-icon" :size="28" />
         <h3>配置您的测算 API 密钥</h3>
         <p>
-          本系统使用您个人的大模型密钥来请求测算服务。密钥完全保存在您本机的浏览器缓存中，不会被上传。
+          请点击右上角设置按钮配置您的专属大模型 API Key，密钥仅保存在您本机浏览器中。
         </p>
         <button class="btn-gradient btn-configure-now" @click="isSettingsOpen = true">
           <Settings :size="14" />
-          配置 API Key
+          配置密钥
         </button>
       </div>
 
-      <!-- 核心组件工作区 -->
+      <!-- 核心组件工作区：内置密钥或用户已配置时显示 -->
       <div v-else class="workspace-area">
         <Transition name="fade" mode="out-in">
           <KeepAlive>
             <component 
               :is="currentTabComponent" 
-              :has-api-key="hasApiKey"
+              :has-api-key="hasBuiltinKey || hasApiKey"
               @request-settings="isSettingsOpen = true"
             />
           </KeepAlive>
@@ -81,7 +85,8 @@
 
     <!-- 密钥设置弹窗 -->
     <ApiKeyModal 
-      :is-open="isSettingsOpen" 
+      :is-open="isSettingsOpen"
+      :has-builtin-key="hasBuiltinKey"
       @close="isSettingsOpen = false"
       @saved="onConfigSaved"
     />
@@ -101,6 +106,7 @@ import ApiKeyModal from './components/ApiKeyModal.vue'
 
 const isSettingsOpen = ref(false)
 const hasApiKey = ref(false)
+const hasBuiltinKey = ref(false) // 服务端是否内置了密钥
 const currentTab = ref('horoscope')
 
 const tabs = [
@@ -128,10 +134,19 @@ const checkApiKey = () => {
   }
 }
 
-onMounted(() => {
+onMounted(async () => {
   checkApiKey()
-  
-  if (!hasApiKey.value) {
+
+  // 向服务端确认是否有内置密钥（只返回布尔值，密钥本身永不暴露）
+  try {
+    const res = await $fetch('/api/check-key')
+    hasBuiltinKey.value = res?.hasBuiltinKey ?? false
+  } catch {
+    hasBuiltinKey.value = false
+  }
+
+  // 如果既无内置密钥也无用户配置，延迟弹出设置
+  if (!hasBuiltinKey.value && !hasApiKey.value) {
     setTimeout(() => {
       isSettingsOpen.value = true
     }, 600)

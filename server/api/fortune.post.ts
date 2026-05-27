@@ -24,16 +24,26 @@ export default defineEventHandler(async (event) => {
   const body = await readBody(event)
   const { type, params } = body
 
-  // 从 Request Headers 中提取密钥和自定义配置
-  const apiKey = getHeader(event, 'x-api-key')
-  const apiBaseUrl = getHeader(event, 'x-api-base-url') || 'https://api.deepseek.com'
-  const apiModel = getHeader(event, 'x-api-model') || 'deepseek-chat'
+  // 密钥优先级：
+  // 1. 服务端环境变量（内置密钥，对浏览器完全不可见）
+  // 2. 用户从前端传入的 Header（用户自备密钥）
+  const builtinKey = process.env.DEEPSEEK_API_KEY?.trim()
+  const userKey = getHeader(event, 'x-api-key')?.trim()
+  const apiKey = builtinKey || userKey
+
+  // 当使用内置密钥时，忽略前端传来的 base url / model，使用环境变量配置
+  const apiBaseUrl = builtinKey
+    ? (process.env.DEEPSEEK_BASE_URL?.trim() || 'https://api.deepseek.com')
+    : (getHeader(event, 'x-api-base-url') || 'https://api.deepseek.com')
+  const apiModel = builtinKey
+    ? (process.env.DEEPSEEK_MODEL?.trim() || 'deepseek-chat')
+    : (getHeader(event, 'x-api-model') || 'deepseek-chat')
 
   if (!apiKey) {
     throw createError({
       statusCode: 401,
       statusMessage: 'Unauthorized',
-      message: '未检测到 API 密钥。请点击右上角设置图标配置您的 API 密钥。'
+      message: '未检测到 API 密钥。请点击右上角设置图标配置您的专属密钥。'
     })
   }
 
