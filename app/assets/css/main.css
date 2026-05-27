@@ -1,4 +1,4 @@
-/* 全局重置与设计系统 */
+/* 极简曜石黑金设计系统 */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -6,176 +6,145 @@
 }
 
 body {
-  background-color: #03050c;
-  background-image: 
-    radial-gradient(circle at 20% 30%, rgba(14, 116, 144, 0.2) 0%, transparent 50%),
-    radial-gradient(circle at 80% 70%, rgba(3, 105, 161, 0.15) 0%, transparent 50%),
-    radial-gradient(circle at 50% 50%, rgba(3, 7, 18, 1) 0%, rgba(1, 3, 8, 1) 100%);
-  background-attachment: fixed;
+  background-color: #050508;
   color: #f1f5f9;
-  font-family: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-family: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   min-height: 100vh;
   line-height: 1.6;
   overflow-x: hidden;
 }
 
-/* 繁星背景闪烁 */
-@keyframes twinkle {
-  0%, 100% { opacity: 0.15; transform: scale(0.7); }
-  50% { opacity: 1; transform: scale(1.3); box-shadow: 0 0 8px rgba(255, 255, 255, 0.8); }
-}
-
-/* 玻璃拟物卡片 */
+/* 极薄极简卡片 */
 .glass-panel {
-  background: rgba(10, 25, 47, 0.25);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(56, 189, 248, 0.08);
-  border-radius: 16px;
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.6);
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  background: rgba(15, 15, 20, 0.45);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: 12px;
+  box-shadow: 0 4px 24px 0 rgba(0, 0, 0, 0.5);
+  transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 .glass-panel:hover {
-  border-color: rgba(56, 189, 248, 0.25);
-  transform: translateY(-4px);
-  box-shadow: 0 12px 40px 0 rgba(14, 165, 233, 0.15);
+  border-color: rgba(197, 168, 128, 0.2); /* 哑光金 */
+  transform: translateY(-2px);
+  background: rgba(15, 15, 20, 0.6);
 }
 
-/* 极光星空渐变发光按钮 */
+/* 曜石黑哑光金边按钮 */
 .btn-gradient {
-  background: linear-gradient(135deg, #0f766e 0%, #0369a1 50%, #0284c7 100%);
-  background-size: 200% 200%;
-  color: #f8fafc;
-  border: 1px solid rgba(56, 189, 248, 0.2);
+  background: #0a0a0f;
+  border: 1px solid #c5a880;
+  color: #c5a880;
   padding: 12px 24px;
-  border-radius: 12px;
-  font-weight: 600;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 4px 15px rgba(2, 132, 199, 0.25);
-  position: relative;
-  overflow: hidden;
-}
-
-/* 按钮流光划过（Shimmer）效果 */
-.btn-gradient::after {
-  content: '';
-  position: absolute;
-  top: -50%;
-  left: -60%;
-  width: 30%;
-  height: 200%;
-  background: rgba(255, 255, 255, 0.15);
-  transform: rotate(30deg);
-  transition: none;
-}
-
-.btn-gradient:hover::after {
-  left: 150%;
-  transition: all 0.8s ease-in-out;
+  transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 .btn-gradient:hover:not(:disabled) {
-  background-position: right center;
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(2, 132, 199, 0.45);
-  border-color: rgba(56, 189, 248, 0.4);
+  background: #c5a880;
+  color: #050508;
+  box-shadow: 0 0 15px rgba(197, 168, 128, 0.2);
 }
 
 .btn-gradient:active:not(:disabled) {
-  transform: translateY(0);
+  transform: scale(0.98);
 }
 
 .btn-gradient:disabled {
-  opacity: 0.4;
+  opacity: 0.3;
   cursor: not-allowed;
-  transform: none;
-  box-shadow: none;
+  border-color: rgba(255, 255, 255, 0.1);
+  color: #475569;
+  background: transparent;
 }
 
-/* 幽蓝白玻璃按钮 */
+/* 简约暗灰玻璃按钮 */
 .btn-glass {
-  background: rgba(14, 116, 144, 0.05);
-  border: 1px solid rgba(56, 189, 248, 0.12);
-  color: #cbd5e1;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #94a3b8;
   padding: 10px 20px;
-  border-radius: 12px;
+  border-radius: 8px;
   font-weight: 500;
+  font-size: 0.85rem;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.25s ease;
 }
 
 .btn-glass:hover:not(:disabled) {
-  background: rgba(14, 116, 144, 0.15);
-  border-color: rgba(56, 189, 248, 0.3);
-  color: #f8fafc;
-  transform: translateY(-1px);
+  border-color: rgba(255, 255, 255, 0.2);
+  color: #f1f5f9;
+  background: rgba(255, 255, 255, 0.02);
 }
 
 .btn-glass:disabled {
-  opacity: 0.4;
+  opacity: 0.3;
   cursor: not-allowed;
 }
 
-/* 输入框与选择器 */
+/* 简约极薄输入框 */
 .input-glass {
-  background: rgba(3, 7, 18, 0.4);
-  border: 1px solid rgba(56, 189, 248, 0.12);
-  border-radius: 12px;
-  color: #f8fafc;
+  background: rgba(10, 10, 12, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  color: #f1f5f9;
   padding: 12px 16px;
   outline: none;
   font-family: inherit;
+  font-size: 0.9rem;
   transition: all 0.3s ease;
   width: 100%;
 }
 
 .input-glass:focus {
-  border-color: rgba(14, 165, 233, 0.6);
-  background: rgba(10, 25, 47, 0.3);
-  box-shadow: 0 0 15px rgba(14, 165, 233, 0.15);
+  border-color: rgba(197, 168, 128, 0.4);
+  background: rgba(15, 15, 18, 0.8);
 }
 
 .input-glass::placeholder {
-  color: #475569;
+  color: #334155;
 }
 
-/* 自定义滚动条 */
+/* 滚动条 */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 4px;
+  height: 4px;
 }
 
 ::-webkit-scrollbar-track {
-  background: rgba(1, 3, 8, 0.2);
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(56, 189, 248, 0.15);
-  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 2px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(56, 189, 248, 0.35);
+  background: rgba(197, 168, 128, 0.3);
 }
 
 /* 页面淡入过渡 */
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 0.3s ease, transform 0.3s ease;
+  transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;
-  transform: translateY(10px);
+  transform: translateY(6px);
 }

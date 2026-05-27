@@ -35,28 +35,28 @@
         <!-- 详细批示网格 -->
         <div class="bazi-details-grid">
           <div class="detail-block">
-            <div class="block-title font-sky">
+            <div class="block-title font-gold">
               <span>☯</span> 性格特质
             </div>
             <p>{{ result.personality }}</p>
           </div>
 
           <div class="detail-block">
-            <div class="block-title font-amber">
+            <div class="block-title font-gold">
               <span>💼</span> 事业学业
             </div>
             <p>{{ result.career }}</p>
           </div>
 
           <div class="detail-block">
-            <div class="block-title font-rose">
+            <div class="block-title font-gold">
               <span>❤️</span> 婚恋感情
             </div>
             <p>{{ result.love }}</p>
           </div>
 
           <div class="detail-block">
-            <div class="block-title font-emerald">
+            <div class="block-title font-gold">
               <span>☘</span> 健康运势
             </div>
             <p>{{ result.health }}</p>
@@ -257,12 +257,11 @@ const reset = () => {
 }
 
 .section-title h2 {
-  font-size: 1.5rem;
-  color: white;
+  font-size: 1.35rem;
+  color: #f1f5f9;
+  letter-spacing: 1px;
+  font-weight: 500;
   margin-bottom: 6px;
-  background: linear-gradient(135deg, #f8fafc 0%, #38bdf8 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
 }
 
 .section-title p {
@@ -312,9 +311,9 @@ const reset = () => {
 }
 
 .gender-btn.active {
-  background: rgba(245, 158, 11, 0.1);
-  border-color: rgba(245, 158, 11, 0.4);
-  color: #fbbf24;
+  background: rgba(197, 168, 128, 0.05);
+  border-color: rgba(197, 168, 128, 0.35);
+  color: #c5a880;
 }
 
 .select-dark {
@@ -345,9 +344,7 @@ const reset = () => {
   line-height: 1;
   margin-bottom: 24px;
   animation: yinYangSpin 3s linear infinite, yinYangGlow 2s ease-in-out infinite;
-  background: linear-gradient(135deg, #f59e0b, #d97706);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: #c5a880;
   width: 72px;
   height: 72px;
   display: flex;
@@ -412,8 +409,8 @@ const reset = () => {
 /* 命盘 */
 .bazi-disk {
   padding: 20px;
-  background: rgba(245, 158, 11, 0.03);
-  border: 1px solid rgba(245, 158, 11, 0.15);
+  background: rgba(255, 255, 255, 0.015);
+  border: 1px solid rgba(255, 255, 255, 0.05);
   border-radius: 12px;
   text-align: center;
   margin-bottom: 20px;
@@ -423,7 +420,7 @@ const reset = () => {
   font-size: 0.75rem;
   font-weight: 600;
   text-transform: uppercase;
-  color: #fbbf24;
+  color: #cbd5e1;
   margin-bottom: 8px;
   letter-spacing: 2px;
 }
@@ -438,7 +435,9 @@ const reset = () => {
 /* 五行 */
 .wuxing-card {
   padding: 16px;
-  background: rgba(255, 255, 255, 0.02);
+  background: rgba(255, 255, 255, 0.015);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: 12px;
   margin-bottom: 24px;
 }
 
@@ -451,7 +450,7 @@ const reset = () => {
 .wuxing-value {
   font-size: 1.05rem;
   font-weight: 600;
-  color: #fbbf24;
+  color: #cbd5e1;
 }
 
 /* 详细批示 */
@@ -488,16 +487,13 @@ const reset = () => {
   line-height: 1.6;
 }
 
-.font-sky { color: #38bdf8; }
-.font-amber { color: #fbbf24; }
-.font-rose { color: #f43f5e; }
-.font-emerald { color: #34d399; }
+.font-gold { color: #c5a880; }
 
 /* 开运建议 */
 .advice-card {
   padding: 16px 20px;
-  background: linear-gradient(135deg, rgba(245, 158, 11, 0.1) 0%, rgba(217, 119, 6, 0.1) 100%);
-  border: 1px solid rgba(245, 158, 11, 0.2);
+  background: rgba(197, 168, 128, 0.05);
+  border: 1px solid rgba(197, 168, 128, 0.15);
   border-radius: 12px;
   display: flex;
   align-items: center;
@@ -505,18 +501,18 @@ const reset = () => {
 }
 
 .advice-tag {
-  background: #fbbf24;
-  color: #1e1b4b;
+  background: #c5a880;
+  color: #050508;
   font-size: 0.75rem;
   font-weight: 700;
   padding: 4px 8px;
-  border-radius: 6px;
+  border-radius: 4px;
   flex-shrink: 0;
 }
 
 .advice-content {
   font-size: 0.9rem;
-  color: #fbbf24;
+  color: #cbd5e1;
   font-weight: 500;
   line-height: 1.4;
 }
@@ -543,7 +539,7 @@ const reset = () => {
 }
 
 @keyframes yinYangGlow {
-  0%, 100% { filter: drop-shadow(0 0 5px rgba(245, 158, 11, 0.4)); }
-  50% { filter: drop-shadow(0 0 18px rgba(245, 158, 11, 0.85)); }
+  0%, 100% { filter: drop-shadow(0 0 5px rgba(197, 168, 128, 0.3)); }
+  50% { filter: drop-shadow(0 0 14px rgba(197, 168, 128, 0.7)); }
 }
 </style>

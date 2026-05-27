@@ -59,14 +59,14 @@
         <!-- 幸运要素 -->
         <div class="lucky-grid">
           <div class="lucky-card">
-            <Sparkles class="lucky-icon cyan" :size="18" />
+            <Sparkles class="lucky-icon gold" :size="18" />
             <div>
               <span class="lucky-title">幸运颜色</span>
               <span class="lucky-value">{{ result.luckyColor }}</span>
             </div>
           </div>
           <div class="lucky-card">
-            <Hash class="lucky-icon amber" :size="18" />
+            <Hash class="lucky-icon gold" :size="18" />
             <div>
               <span class="lucky-title">幸运数字</span>
               <span class="lucky-value">{{ result.luckyNumber }}</span>
@@ -251,12 +251,11 @@ const reset = () => {
 }
 
 .section-title h2 {
-  font-size: 1.5rem;
-  color: white;
+  font-size: 1.35rem;
+  color: #f1f5f9;
+  letter-spacing: 1px;
+  font-weight: 500;
   margin-bottom: 6px;
-  background: linear-gradient(135deg, #f8fafc 0%, #38bdf8 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
 }
 
 .section-title p {
@@ -283,23 +282,25 @@ const reset = () => {
 }
 
 .sign-card.active {
-  background: rgba(56, 189, 248, 0.08);
-  border-color: rgba(56, 189, 248, 0.4);
-  box-shadow: 0 0 20px rgba(56, 189, 248, 0.2);
+  background: rgba(197, 168, 128, 0.05);
+  border-color: rgba(197, 168, 128, 0.3);
+  box-shadow: 0 0 15px rgba(197, 168, 128, 0.1);
 }
 
 .sign-icon {
-  font-size: 2rem;
+  font-size: 1.8rem;
   margin-bottom: 6px;
-  background: linear-gradient(135deg, #38bdf8, #fbbf24);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  color: #475569;
+  transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.sign-card.active .sign-icon {
+  color: #c5a880;
 }
 
 .sign-card:hover .sign-icon {
-  transform: scale(1.18) rotate(8deg);
-  filter: drop-shadow(0 0 8px rgba(56, 189, 248, 0.6));
+  transform: translateY(-2px);
+  color: #c5a880;
 }
 
 .sign-name {
@@ -342,8 +343,9 @@ const reset = () => {
 }
 
 .period-btn.active {
-  background: rgba(255, 255, 255, 0.08);
-  color: #38bdf8;
+  background: rgba(255, 255, 255, 0.02);
+  color: #c5a880;
+  border: 1px solid rgba(197, 168, 128, 0.15);
 }
 
 .btn-predict {
@@ -375,13 +377,13 @@ const reset = () => {
   position: absolute;
   width: 100%;
   height: 100%;
-  border: 2px dashed rgba(56, 189, 248, 0.3);
+  border: 1.5px dashed rgba(255, 255, 255, 0.06);
   border-radius: 50%;
   animation: spin 15s linear infinite;
 }
 
 .loading-icon-animate {
-  color: #38bdf8;
+  color: #c5a880;
   animation: pulse 2s ease-in-out infinite;
 }
 
@@ -420,9 +422,7 @@ const reset = () => {
 .sign-symbol {
   font-size: 2.2rem;
   line-height: 1;
-  background: linear-gradient(135deg, #38bdf8, #fbbf24);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: #c5a880;
 }
 
 .sign-badge h3 {
@@ -432,11 +432,11 @@ const reset = () => {
 
 .period-tag {
   font-size: 0.75rem;
-  background: rgba(56, 189, 248, 0.12);
-  color: #38bdf8;
-  border: 1px solid rgba(56, 189, 248, 0.2);
+  background: rgba(197, 168, 128, 0.08);
+  color: #c5a880;
+  border: 1px solid rgba(197, 168, 128, 0.15);
   padding: 2px 8px;
-  border-radius: 6px;
+  border-radius: 4px;
   margin-top: 2px;
   display: inline-block;
 }
@@ -479,9 +479,9 @@ const reset = () => {
 }
 
 .star-filled {
-  color: #fbbf24;
-  fill: #fbbf24;
-  filter: drop-shadow(0 0 4px rgba(251, 191, 36, 0.6));
+  color: #c5a880;
+  fill: #c5a880;
+  filter: drop-shadow(0 0 3px rgba(197, 168, 128, 0.3));
 }
 
 .star-empty {
@@ -510,14 +510,9 @@ const reset = () => {
   border-radius: 8px;
 }
 
-.lucky-icon.cyan {
-  color: #06b6d4;
-  background: rgba(6, 182, 212, 0.1);
-}
-
-.lucky-icon.amber {
-  color: #fbbf24;
-  background: rgba(251, 191, 36, 0.1);
+.lucky-icon.gold {
+  color: #c5a880;
+  background: rgba(197, 168, 128, 0.08);
 }
 
 .lucky-title {
@@ -544,7 +539,7 @@ const reset = () => {
   color: white;
   margin-bottom: 8px;
   font-weight: 600;
-  border-left: 3px solid #38bdf8;
+  border-left: 2px solid #c5a880;
   padding-left: 8px;
 }
 

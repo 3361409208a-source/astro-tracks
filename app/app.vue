@@ -1,50 +1,36 @@
 <template>
   <div class="app-layout">
-    <!-- 动态繁星背景 (增强星空神秘美感) -->
-    <div class="stars-bg">
-      <div 
-        v-for="star in starDots" 
-        :key="star.id" 
-        class="star-dot" 
-        :style="star.style"
-      ></div>
-    </div>
-
-    <!-- 背景极光微光装饰 -->
-    <div class="decor-glow glow-1"></div>
-    <div class="decor-glow glow-2"></div>
-
     <!-- 顶部导航栏 -->
     <header class="app-header glass-panel">
       <div class="logo-area">
-        <Compass class="logo-icon" :size="28" />
+        <Compass class="logo-icon" :size="24" />
         <h1>星轨命鉴</h1>
         <span class="version-badge">MVP</span>
       </div>
 
       <div class="nav-actions">
-        <!-- 未配置密钥时的醒目警告 -->
+        <!-- 未配置密钥时的内敛警告 -->
         <span v-if="!hasApiKey" class="warning-pill" @click="isSettingsOpen = true">
-          <AlertTriangle :size="14" />
-          未配置 API 密钥
+          <AlertTriangle :size="13" />
+          未配置密钥
         </span>
         <span v-else class="success-pill">
-          <ShieldCheck :size="14" />
-          API 已就绪
+          <ShieldCheck :size="13" />
+          服务就绪
         </span>
 
         <button class="btn-settings" @click="isSettingsOpen = true">
-          <Settings :size="20" />
+          <Settings :size="18" />
         </button>
       </div>
     </header>
 
     <!-- 主体区域 -->
     <main class="app-main">
-      <!-- 引导语 -->
+      <!-- 引导语 (简约留白) -->
       <div class="welcome-banner">
-        <h2>探寻命运之轨，解析未来玄机</h2>
-        <p>基于先进的 DeepSeek AI 大模型，为您提供严谨、灵性、深度的星宿、牌意与命理批示。</p>
+        <h2>探寻命运之轨 · 解析未来玄机</h2>
+        <p>基于 DeepSeek AI 批演，为您提供严谨、理性的星宿、牌意与命理批示。</p>
       </div>
 
       <!-- Tab 切换按钮组 -->
@@ -56,21 +42,21 @@
           :class="{ active: currentTab === tab.value }"
           @click="currentTab = tab.value"
         >
-          <component :is="tab.icon" :size="18" />
+          <component :is="tab.icon" :size="16" />
           {{ tab.label }}
         </button>
       </div>
 
-      <!-- 密钥未配置时的中间大卡片提示 -->
+      <!-- 密钥未配置时的简约大卡片提示 -->
       <div v-if="!hasApiKey" class="key-banner glass-panel">
-        <Key class="banner-icon" :size="36" />
+        <Key class="banner-icon" :size="28" />
         <h3>配置您的 DeepSeek API 密钥</h3>
         <p>
-          本系统使用您个人的大模型密钥来请求测算服务。我们不留存任何密钥，所有数据仅存储在您的浏览器本地。
+          本系统使用您个人的大模型密钥来请求测算服务。密钥完全保存在您本机的浏览器缓存中，不会被上传。
         </p>
         <button class="btn-gradient btn-configure-now" @click="isSettingsOpen = true">
-          <Settings :size="16" />
-          立即配置 API Key
+          <Settings :size="14" />
+          配置 API Key
         </button>
       </div>
 
@@ -90,7 +76,7 @@
 
     <!-- 页脚 -->
     <footer class="app-footer">
-      <p>© 2026 星轨命鉴. 仅供娱乐与心理学探索参考.</p>
+      <p>© 2026 星轨命鉴. 仅供心理探索参考.</p>
     </footer>
 
     <!-- 密钥设置弹窗 -->
@@ -116,11 +102,10 @@ import ApiKeyModal from './components/ApiKeyModal.vue'
 const isSettingsOpen = ref(false)
 const hasApiKey = ref(false)
 const currentTab = ref('horoscope')
-const starDots = ref([])
 
 const tabs = [
   { label: '星座运势', value: 'horoscope', icon: Star },
-  { label: '塔罗密境', value: 'tarot', icon: Sparkles },
+  { label: '塔罗占卜', value: 'tarot', icon: Sparkles },
   { label: '生辰八字', value: 'bazi', icon: Compass }
 ]
 
@@ -146,21 +131,10 @@ const checkApiKey = () => {
 onMounted(() => {
   checkApiKey()
   
-  // 生成 35 颗带有随机位置和时间周期的闪烁繁星
-  starDots.value = Array.from({ length: 35 }, (_, i) => ({
-    id: i,
-    style: {
-      top: `${Math.random() * 100}%`,
-      left: `${Math.random() * 100}%`,
-      animationDelay: `${Math.random() * 5}s`,
-      animationDuration: `${2.5 + Math.random() * 3}s`
-    }
-  }))
-
   if (!hasApiKey.value) {
     setTimeout(() => {
       isSettingsOpen.value = true
-    }, 800)
+    }, 600)
   }
 })
 
@@ -175,157 +149,100 @@ const onConfigSaved = () => {
   display: flex;
   flex-direction: column;
   position: relative;
-  overflow: hidden;
-  padding: 24px;
-}
-
-/* 繁星定位背景 */
-.stars-bg {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: -1;
-}
-
-:deep(.star-dot) {
-  position: absolute;
-  width: 2px;
-  height: 2px;
-  background: white;
-  border-radius: 50%;
-  animation: twinkle infinite ease-in-out;
-}
-
-/* 背景极光微光 */
-.decor-glow {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(140px);
-  z-index: -2;
-  pointer-events: none;
-  opacity: 0.15;
-}
-
-.glow-1 {
-  width: 400px;
-  height: 400px;
-  background: radial-gradient(circle, #0891b2 0%, transparent 70%);
-  top: -100px;
-  right: -50px;
-}
-
-.glow-2 {
-  width: 550px;
-  height: 550px;
-  background: radial-gradient(circle, #0284c7 0%, transparent 70%);
-  bottom: -150px;
-  left: -100px;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 40px 24px;
 }
 
 /* 顶部导航 */
 .app-header {
-  max-width: 1200px;
-  width: 100%;
-  margin: 0 auto 32px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 16px 28px;
-  background: rgba(10, 25, 47, 0.25);
-  border: 1px solid rgba(56, 189, 248, 0.08);
+  padding: 14px 24px;
+  background: rgba(10, 10, 15, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  margin-bottom: 48px;
 }
 
 .logo-area {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
 }
 
 .logo-icon {
-  color: #38bdf8;
-  animation: logoSpin 25s linear infinite;
+  color: #c5a880;
 }
 
 .logo-area h1 {
-  font-size: 1.3rem;
-  font-weight: 700;
-  color: #f8fafc;
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: #f1f5f9;
   letter-spacing: 1px;
 }
 
 .version-badge {
-  font-size: 0.65rem;
-  background: rgba(56, 189, 248, 0.08);
-  border: 1px solid rgba(56, 189, 248, 0.12);
-  color: #38bdf8;
-  padding: 1px 6px;
-  border-radius: 4px;
+  font-size: 0.6rem;
+  background: rgba(197, 168, 128, 0.08);
+  border: 1px solid rgba(197, 168, 128, 0.15);
+  color: #c5a880;
+  padding: 1px 5px;
+  border-radius: 3px;
+  font-weight: 500;
 }
 
 .nav-actions {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 12px;
 }
 
 .warning-pill {
-  font-size: 0.75rem;
-  background: rgba(239, 68, 68, 0.1);
-  border: 1px solid rgba(239, 68, 68, 0.2);
+  font-size: 0.7rem;
+  background: transparent;
+  border: 1px solid rgba(239, 68, 68, 0.25);
   color: #f87171;
-  padding: 4px 10px;
-  border-radius: 20px;
+  padding: 3px 8px;
+  border-radius: 4px;
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 4px;
   cursor: pointer;
-  transition: all 0.2s;
-}
-
-.warning-pill:hover {
-  background: rgba(239, 68, 68, 0.2);
 }
 
 .success-pill {
-  font-size: 0.75rem;
-  background: rgba(16, 185, 129, 0.1);
-  border: 1px solid rgba(16, 185, 129, 0.2);
+  font-size: 0.7rem;
+  background: transparent;
+  border: 1px solid rgba(16, 185, 129, 0.25);
   color: #34d399;
-  padding: 4px 10px;
-  border-radius: 20px;
+  padding: 3px 8px;
+  border-radius: 4px;
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 4px;
 }
 
 .btn-settings {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(56, 189, 248, 0.12);
-  color: #94a3b8;
-  padding: 8px;
-  border-radius: 10px;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  color: #64748b;
+  padding: 6px;
+  border-radius: 6px;
   cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.2s;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .btn-settings:hover {
-  background: rgba(56, 189, 248, 0.1);
-  color: #f8fafc;
-  transform: rotate(45deg);
-  box-shadow: 0 0 12px rgba(56, 189, 248, 0.3);
+  border-color: #c5a880;
+  color: #c5a880;
 }
 
 /* 主体容器 */
 .app-main {
-  max-width: 1200px;
-  width: 100%;
-  margin: 0 auto;
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -333,96 +250,93 @@ const onConfigSaved = () => {
 
 .welcome-banner {
   text-align: center;
-  margin-bottom: 32px;
+  margin-bottom: 40px;
 }
 
 .welcome-banner h2 {
-  font-size: 1.8rem;
-  font-weight: 700;
-  color: white;
-  margin-bottom: 10px;
-  background: linear-gradient(135deg, #f8fafc 0%, #38bdf8 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  font-size: 1.45rem;
+  font-weight: 500;
+  color: #f1f5f9;
+  letter-spacing: 2px;
+  margin-bottom: 8px;
 }
 
 .welcome-banner p {
-  font-size: 0.95rem;
-  color: #94a3b8;
-  max-width: 600px;
+  font-size: 0.85rem;
+  color: #64748b;
+  max-width: 500px;
   margin: 0 auto;
-  line-height: 1.5;
+  line-height: 1.6;
 }
 
 /* Tab 切换栏 */
 .tab-selector {
   width: 100%;
-  max-width: 600px;
-  margin: 0 auto 36px;
+  max-width: 520px;
+  margin: 0 auto 40px;
   display: flex;
-  padding: 6px;
-  background: rgba(10, 25, 47, 0.2);
-  border: 1px solid rgba(56, 189, 248, 0.06);
+  padding: 4px;
+  background: rgba(8, 8, 12, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  border-radius: 8px;
 }
 
 .tab-btn {
   flex: 1;
   background: transparent;
   border: none;
-  color: #94a3b8;
-  padding: 12px;
-  font-weight: 600;
-  font-size: 0.95rem;
+  color: #64748b;
+  padding: 10px;
+  font-weight: 500;
+  font-size: 0.85rem;
   cursor: pointer;
-  border-radius: 12px;
+  border-radius: 6px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  gap: 6px;
+  transition: all 0.2s ease;
 }
 
 .tab-btn:hover {
-  color: #38bdf8;
+  color: #cbd5e1;
 }
 
 .tab-btn.active {
-  background: rgba(56, 189, 248, 0.08);
-  color: #38bdf8;
-  border: 1px solid rgba(56, 189, 248, 0.15);
-  box-shadow: 0 0 10px rgba(56, 189, 248, 0.05);
+  background: rgba(255, 255, 255, 0.02);
+  color: #c5a880;
+  border: 1px solid rgba(197, 168, 128, 0.15);
 }
 
 /* 密钥提醒 Banner */
 .key-banner {
-  max-width: 500px;
+  max-width: 440px;
   width: 100%;
   margin: 40px auto;
-  padding: 32px;
+  padding: 28px;
   text-align: center;
 }
 
 .banner-icon {
-  color: #38bdf8;
-  margin-bottom: 16px;
-  animation: logoPulse 2s ease-in-out infinite;
+  color: #c5a880;
+  margin-bottom: 12px;
 }
 
 .key-banner h3 {
-  font-size: 1.2rem;
-  color: white;
-  margin-bottom: 10px;
+  font-size: 1.05rem;
+  color: #f1f5f9;
+  margin-bottom: 8px;
 }
 
 .key-banner p {
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   color: #64748b;
   line-height: 1.5;
-  margin-bottom: 24px;
+  margin-bottom: 20px;
 }
 
 .btn-configure-now {
-  padding: 10px 20px;
+  padding: 8px 18px;
 }
 
 .workspace-area {
@@ -434,30 +348,20 @@ const onConfigSaved = () => {
 .app-footer {
   text-align: center;
   padding: 40px 0 12px;
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   color: #334155;
-}
-
-/* 旋转与呼吸动效 */
-@keyframes logoSpin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-@keyframes logoPulse {
-  0%, 100% { transform: scale(1); opacity: 0.8; }
-  50% { transform: scale(1.08); opacity: 1; filter: drop-shadow(0 0 10px rgba(56, 189, 248, 0.3)); }
 }
 
 @media (max-width: 640px) {
   .app-layout {
-    padding: 16px;
+    padding: 20px 16px;
   }
   .app-header {
-    padding: 12px 16px;
+    padding: 10px 16px;
+    margin-bottom: 32px;
   }
   .welcome-banner h2 {
-    font-size: 1.4rem;
+    font-size: 1.2rem;
   }
 }
 </style>
