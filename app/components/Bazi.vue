@@ -77,7 +77,7 @@
         <div class="yin-yang-icon">☯</div>
       </div>
       <p class="loading-text">正在根据天干地支排盘，测算八字运势...</p>
-      <span class="loading-sub">DeepSeek 正在为您推演乾坤五行之变</span>
+      <span class="loading-sub">命理罗盘正在为您推演乾坤五行之变</span>
     </div>
 
     <!-- 输入表单 -->

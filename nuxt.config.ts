@@ -11,7 +11,7 @@ export default defineNuxtConfig({
     head: {
       title: '星轨命鉴 - 综合占卜测算 MVP',
       meta: [
-        { name: 'description', content: '基于 DeepSeek 驱动的星座运势、塔罗占卜、生辰八字综合测算服务。' }
+        { name: 'description', content: '基于人工智能驱动的星座运势、塔罗占卜、生辰八字综合测算服务。' }
       ],
       link: [
         { rel: 'preconnect', href: 'https://fonts.googleapis.com' },

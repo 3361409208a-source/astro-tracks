@@ -30,7 +30,7 @@
       <!-- 引导语 (简约留白) -->
       <div class="welcome-banner">
         <h2>探寻命运之轨 · 解析未来玄机</h2>
-        <p>基于 DeepSeek AI 批演，为您提供严谨、理性的星宿、牌意与命理批示。</p>
+        <p>基于精密星轨与古典命理推演，为您提供严谨、理性的星宿、牌意与命理批示。</p>
       </div>
 
       <!-- Tab 切换按钮组 -->
@@ -50,7 +50,7 @@
       <!-- 密钥未配置时的简约大卡片提示 -->
       <div v-if="!hasApiKey" class="key-banner glass-panel">
         <Key class="banner-icon" :size="28" />
-        <h3>配置您的 DeepSeek API 密钥</h3>
+        <h3>配置您的测算 API 密钥</h3>
         <p>
           本系统使用您个人的大模型密钥来请求测算服务。密钥完全保存在您本机的浏览器缓存中，不会被上传。
         </p>

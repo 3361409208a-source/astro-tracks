@@ -14,11 +14,11 @@
 
         <div class="modal-body">
           <p class="modal-desc">
-            请配置您的 <strong>DeepSeek API</strong> 信息。数据将完全保存在您的本地浏览器中（LocalStorage），不会上传至任何第三方服务器。
+            请配置您的<strong>大模型测算接口 (API)</strong> 信息。数据将完全保存在您的本地浏览器中（LocalStorage），不会上传至任何第三方服务器。
           </p>
 
           <div class="form-group">
-            <label>DEEPSEEK_API_KEY <span class="required">*</span></label>
+            <label>测算 API_KEY <span class="required">*</span></label>
             <div class="input-wrapper">
               <input 
                 :type="showKey ? 'text' : 'password'" 
@@ -31,7 +31,7 @@
                 <EyeOff v-else :size="16" />
               </button>
             </div>
-            <span class="help-text">请在 <a href="https://platform.deepseek.com/" target="_blank" class="link-highlight">DeepSeek 开放平台</a> 获取您的 API Key。</span>
+            <span class="help-text">请在您所使用的大模型开放平台获取对应的 API Key。</span>
           </div>
 
           <div class="form-group">
@@ -39,7 +39,7 @@
             <input 
               type="text" 
               v-model="config.apiBaseUrl" 
-              placeholder="https://api.deepseek.com" 
+              placeholder="https://api.domain.com" 
               class="input-glass"
             />
           </div>
@@ -49,7 +49,7 @@
             <input 
               type="text" 
               v-model="config.apiModel" 
-              placeholder="deepseek-chat" 
+              placeholder="model-name" 
               class="input-glass"
             />
           </div>

@@ -7,7 +7,7 @@
 <a name="english"></a>
 ## English Introduction
 
-**AstroTracks** is a premium, full-stack web application for comprehensive divination and astrology, built with **Nuxt.js** and powered by the **DeepSeek API**. It offers Horoscope Forecasts, Tarot Reading, and Bazi (生辰八字) fortune-telling in a highly interactive, responsive, and visually stunning interface.
+**AstroTracks** is a premium, full-stack web application for comprehensive divination and astrology, built with **Nuxt.js** and powered by large language models. It offers Horoscope Forecasts, Tarot Reading, and Bazi (生辰八字) fortune-telling in a highly interactive, responsive, and visually stunning interface.
 
 ### ✨ Key Features
 - **Horoscope Forecasts**: Check today, weekly, and monthly fortune index, lucky elements, and deep star alignments for all 12 zodiac signs.
@@ -15,13 +15,13 @@
 - **Bazi Astrology**: Input your birth date, time, gender, and name to calculate the Chinese Sexagenary Cycle, 5 Elements (五行) distribution, and destiny guidance.
 - **API Key Control**: The application stores API keys completely inside the user's browser `localStorage`. No keys are saved on external servers, ensuring zero risk of key leakage.
 - **Secure Server Proxy**: Front-end requests are proxied via Nuxt Serverless Routes (`/api/fortune`) with custom request headers, fully bypassing browser CORS restrictions.
-- **Aesthetic UI**: A dark universe theme designed with a fluid glow background and elegant glassmorphism panels. Fully optimized for mobile screens.
+- **Aesthetic UI**: A premium dark universe theme designed with a clean obsidian black-gold background and elegant glassmorphism panels. Fully optimized for mobile screens.
 
 ### 🛠️ Tech Stack
 - **Framework**: Nuxt.js (Nitro Server, Vite, Vue 3)
 - **Icons**: Lucide Icons (`lucide-vue-next`)
-- **Styling**: Vanilla CSS (CSS Variables, Backdrop blur filters, keyframe animations)
-- **AI Model**: DeepSeek (`deepseek-chat`)
+- **Styling**: Vanilla CSS (CSS Variables, Backdrop blur filters, keyframe transitions)
+- **AI Model Support**: Divination models (compatible with OpenAI-like API schemas)
 
 ### ⚡ Quick Start (Local)
 
@@ -34,8 +34,8 @@
    ```bash
    npm run dev
    ```
-4. Open [http://localhost:3000/](http://localhost:3000/) in your browser.
-5. Click the gear icon on the top right to configure your DeepSeek API Key.
+4. Open [http://localhost:3002/](http://localhost:3002/) in your browser.
+5. Click the gear icon on the top right to configure your API Key.
 
 ### ☁️ Vercel Deployment
 Since the API Key is entered by the user in the UI, you don't need to configure any environment variables in Vercel!
@@ -48,7 +48,7 @@ Since the API Key is entered by the user in the UI, you don't need to configure 
 <a name="chinese"></a>
 ## 中文介绍
 
-**星轨命鉴 (AstroTracks)** 是一款基于 **Nuxt.js** 全栈框架与 **DeepSeek API** 驱动的高档占卜测算综合 Web 应用。系统涵盖了星座运势、时间流塔罗牌占卜以及传统的生辰八字命理排盘批注。
+**星轨命鉴 (AstroTracks)** 是一款基于 **Nuxt.js** 全栈框架与人工智能驱动的高档占卜测算综合 Web 应用。系统涵盖了星座运势、时间流塔罗牌占卜以及传统的生辰八字命理排盘批注。
 
 ### ✨ 核心特性
 - **星座运势**：支持 12 星座的今日、本周、本月运势预测，包含爱情/财富/事业指数、幸运色、幸运数字及星象密语。
@@ -56,13 +56,13 @@ Since the API Key is entered by the user in the UI, you don't need to configure 
 - **八字精密测算**：输入生辰八字信息（支持精确时辰），进行干支排盘与五行喜忌分析，批解性格、事业、感情和健康。
 - **安全密钥机制**：API Key 完全由用户在前端设置并保存在浏览器本地的 `localStorage` 中，无服务器泄露密钥风险。
 - **安全代理转发**：利用 Nuxt 的服务端路由 (`/api/fortune`) 代理转发 API 请求，完美解决浏览器跨域 (CORS) 限制。
-- **极佳视觉美学**：采用液态深色宇宙底色与现代毛玻璃（Glassmorphism）卡片设计，且完全适配手机移动端。
+- **极佳视觉美学**：采用曜石黑金极简配色与现代薄透毛玻璃（Glassmorphism）卡片设计，且完全适配手机移动端。
 
 ### 🛠️ 技术栈
 - **核心框架**：Nuxt.js (Nitro 引擎, Vite, Vue 3)
 - **图标系统**：Lucide 图标库 (`lucide-vue-next`)
-- **页面样式**：原生 CSS (CSS 变量, Backdrop 模糊滤镜, 物理缩放动效)
-- **大模型支持**：DeepSeek 官方 API (`deepseek-chat`)
+- **页面样式**：原生 CSS (CSS 变量, Backdrop 模糊滤镜, 3D 卡牌倾斜)
+- **大模型支持**：主流大模型官方 API (兼容 OpenAI 格式接口，如 deepseek-chat 等)
 
 ### ⚡ 本地快速启动
 
@@ -75,8 +75,8 @@ Since the API Key is entered by the user in the UI, you don't need to configure 
    ```bash
    npm run dev
    ```
-4. 用浏览器打开 [http://localhost:3000/](http://localhost:3000/)。
-5. 点击右上角齿轮图标，填入您的 DeepSeek API Key 即可开始测算。
+4. 用浏览器打开 [http://localhost:3002/](http://localhost:3002/)。
+5. 点击右上角齿轮图标，填入您的 API Key 即可开始测算。
 
 ### ☁️ Vercel 极速部署
 由于 API Key 采用了客户端自配的机制，您在部署到 Vercel 时**无需配置任何环境变量**，十分省心！

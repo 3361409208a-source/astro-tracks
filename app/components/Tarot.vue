@@ -61,7 +61,7 @@
         <div class="shuffling-card c3"></div>
       </div>
       <p class="loading-text">正在开启灵性场域，为您解读塔罗牌意...</p>
-      <span class="loading-sub">DeepSeek 正在细细揣摩时间之河的涟漪</span>
+      <span class="loading-sub">灵性罗盘正在细细揣摩时间之河的涟漪</span>
     </div>
 
     <!-- 洗牌动效 -->

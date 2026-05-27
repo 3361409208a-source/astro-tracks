@@ -33,7 +33,7 @@ export default defineEventHandler(async (event) => {
     throw createError({
       statusCode: 401,
       statusMessage: 'Unauthorized',
-      message: '未检测到 API 密钥。请点击右上角设置图标配置您的 DeepSeek API Key。'
+      message: '未检测到 API 密钥。请点击右上角设置图标配置您的 API 密钥。'
     })
   }
 

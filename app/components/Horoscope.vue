@@ -89,7 +89,7 @@
         <Sparkles class="loading-icon-animate" :size="32" />
       </div>
       <p class="loading-text">正在勾勒星轨，解析 {{ selectedSign }} 的{{ periodText }}运势...</p>
-      <span class="loading-sub">DeepSeek 正在为您连通星际能量</span>
+      <span class="loading-sub">星轨罗盘正在为您连通星际能量</span>
     </div>
 
     <!-- 选择星座和维度 -->
