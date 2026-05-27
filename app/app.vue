@@ -1,6 +1,31 @@
 <template>
-  <div class="app-layout">
-    <!-- 动态场景背景图层 -->
+  <div>
+    <!-- 首屏加载动画 -->
+    <Transition name="loading-fade">
+      <div v-if="isAppLoading" class="app-loading-screen">
+        <div class="compass-wrapper">
+          <svg class="celestial-compass" viewBox="0 0 100 100">
+            <circle class="ring track-ring" cx="50" cy="50" r="46" />
+            <circle class="ring star-ring" cx="50" cy="50" r="38" stroke-dasharray="6 3 2 3" />
+            <circle class="ring bagua-ring" cx="50" cy="50" r="28" stroke-dasharray="15 5" />
+            <circle class="ring core-ring" cx="50" cy="50" r="18" stroke-dasharray="2 10" />
+          </svg>
+          <Compass class="compass-center-icon" :size="32" />
+          <Sparkles class="sparkle-1" :size="14" />
+          <Sparkles class="sparkle-2" :size="10" />
+        </div>
+        <div class="loading-tips-area">
+          <div class="loading-title">星轨命鉴</div>
+          <div class="loading-subtitle">{{ currentTip }}</div>
+          <div class="loading-bar-container">
+            <div class="loading-bar-progress"></div>
+          </div>
+        </div>
+      </div>
+    </Transition>
+
+    <div class="app-layout">
+      <!-- 动态场景背景图层 -->
     <Transition name="bg-fade">
       <div
         :key="currentTab"
@@ -100,6 +125,7 @@
       @close="isSettingsOpen = false"
       @saved="onConfigSaved"
     />
+    </div>
   </div>
 </template>
 
@@ -118,6 +144,17 @@ const isSettingsOpen = ref(false)
 const hasApiKey = ref(false)
 const hasBuiltinKey = ref(false)
 const currentTab = ref('horoscope')
+const isAppLoading = ref(true)
+const currentTip = ref('天机罗盘校准中，正在连通星宿...')
+
+const loadingTips = [
+  '天机罗盘校准中，正在连通星宿...',
+  '生辰八字排盘中，推演干支气运...',
+  '塔罗牌灵凝聚中，洗牌聆听神谕...',
+  '星轨星图测算中，洞悉今日玄机...'
+]
+
+let tipInterval = null
 
 const bgMap = {
   horoscope: '/bg/horoscope.png',
@@ -153,15 +190,34 @@ const checkApiKey = () => {
 }
 
 onMounted(async () => {
+  // 启动加载提示词轮播
+  let tipIndex = 0
+  tipInterval = setInterval(() => {
+    tipIndex = (tipIndex + 1) % loadingTips.length
+    currentTip.value = loadingTips[tipIndex]
+  }, 600)
+
   checkApiKey()
 
-  // 向服务端确认是否有内置密钥（只返回布尔值，密钥本身永不暴露）
-  try {
-    const res = await $fetch('/api/check-key')
-    hasBuiltinKey.value = res?.hasBuiltinKey ?? false
-  } catch {
-    hasBuiltinKey.value = false
-  }
+  // 保证至少展示 1500ms，使得加载动画有一个优雅的呈现过程
+  const minLoadingTime = new Promise(resolve => setTimeout(resolve, 1500))
+
+  // 向服务端确认是否有内置密钥
+  const keyCheck = (async () => {
+    try {
+      const res = await $fetch('/api/check-key')
+      hasBuiltinKey.value = res?.hasBuiltinKey ?? false
+    } catch {
+      hasBuiltinKey.value = false
+    }
+  })()
+
+  // 等待加载限制与密钥检查完毕
+  await Promise.all([minLoadingTime, keyCheck])
+
+  // 清理计时器并关闭加载遮罩
+  if (tipInterval) clearInterval(tipInterval)
+  isAppLoading.value = false
 
   // 如果既无内置密钥也无用户配置，延迟弹出设置
   if (!hasBuiltinKey.value && !hasApiKey.value) {
@@ -435,5 +491,174 @@ const onConfigSaved = () => {
   .welcome-banner h2 {
     font-size: 1rem;
   }
+}
+
+/* ── 全屏加载动画 ── */
+.app-loading-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: radial-gradient(circle at center, #0d1222 0%, #030408 100%);
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+}
+
+.compass-wrapper {
+  position: relative;
+  width: 180px;
+  height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 32px;
+}
+
+.celestial-compass {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.celestial-compass .ring {
+  fill: none;
+  stroke: #c5a880;
+  stroke-width: 0.75;
+  transform-origin: center;
+}
+
+.track-ring {
+  stroke-width: 0.5;
+  opacity: 0.15;
+  animation: spin-clockwise 25s linear infinite;
+}
+
+.star-ring {
+  opacity: 0.3;
+  animation: spin-counter-clockwise 18s linear infinite;
+}
+
+.bagua-ring {
+  opacity: 0.55;
+  stroke-width: 1;
+  animation: spin-clockwise 12s linear infinite;
+}
+
+.core-ring {
+  opacity: 0.75;
+  stroke-width: 1.2;
+  animation: spin-counter-clockwise 8s linear infinite;
+}
+
+.compass-center-icon {
+  color: #c5a880;
+  filter: drop-shadow(0 0 10px rgba(197, 168, 128, 0.6));
+  animation: compass-pulse 2s ease-in-out infinite;
+  z-index: 2;
+}
+
+.sparkle-1 {
+  position: absolute;
+  color: #c5a880;
+  top: 25px;
+  right: 25px;
+  animation: sparkle-blink 1.5s ease-in-out infinite alternate;
+}
+
+.sparkle-2 {
+  position: absolute;
+  color: #c5a880;
+  bottom: 25px;
+  left: 25px;
+  animation: sparkle-blink 2s ease-in-out infinite alternate-reverse;
+}
+
+.loading-tips-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 0 20px;
+}
+
+.loading-title {
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: #ffffff;
+  letter-spacing: 6px;
+  margin-bottom: 12px;
+  text-shadow: 0 0 12px rgba(255, 255, 255, 0.15);
+  font-family: "Outfit", "Inter", sans-serif;
+}
+
+.loading-subtitle {
+  font-size: 0.85rem;
+  color: #94a3b8;
+  height: 20px;
+  line-height: 20px;
+  letter-spacing: 1px;
+  margin-bottom: 24px;
+  transition: all 0.3s ease;
+}
+
+.loading-bar-container {
+  width: 160px;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.loading-bar-progress {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, transparent, #c5a880, transparent);
+  animation: loading-fill 1.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* 过渡动效 */
+.loading-fade-leave-active {
+  transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.loading-fade-leave-to {
+  opacity: 0;
+  transform: scale(1.04);
+}
+
+/* 动画关键帧 */
+@keyframes spin-clockwise {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes spin-counter-clockwise {
+  from { transform: rotate(360deg); }
+  to { transform: rotate(0deg); }
+}
+
+@keyframes compass-pulse {
+  0%, 100% {
+    transform: scale(1) rotate(0deg);
+    filter: drop-shadow(0 0 10px rgba(197, 168, 128, 0.6));
+  }
+  50% {
+    transform: scale(1.08) rotate(5deg);
+    filter: drop-shadow(0 0 18px rgba(197, 168, 128, 0.8));
+  }
+}
+
+@keyframes sparkle-blink {
+  0% { transform: scale(0.6); opacity: 0.3; }
+  100% { transform: scale(1.1); opacity: 1; filter: drop-shadow(0 0 4px #c5a880); }
+}
+
+@keyframes loading-fill {
+  0% { width: 0%; }
+  100% { width: 100%; }
 }
 </style>
