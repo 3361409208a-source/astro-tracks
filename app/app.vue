@@ -493,6 +493,57 @@ const onConfigSaved = () => {
   }
 }
 
+/* iPhone 13 mini / 375px 小屏适配 */
+@media (max-width: 480px) {
+  .app-layout {
+    padding: 10px 12px calc(20px + env(safe-area-inset-bottom));
+  }
+  .app-header {
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 8px 10px;
+  }
+  .logo-area h1 {
+    font-size: 1rem;
+    letter-spacing: 0.5px;
+  }
+  .version-badge {
+    display: none;
+  }
+  .nav-actions {
+    gap: 8px;
+  }
+  .success-pill,
+  .warning-pill {
+    font-size: 0.65rem;
+    padding: 2px 6px;
+  }
+  .welcome-banner {
+    margin-bottom: 12px;
+  }
+  .welcome-banner h2 {
+    font-size: 0.95rem;
+    letter-spacing: 1px;
+  }
+  .welcome-banner p {
+    font-size: 0.75rem;
+    max-width: 100%;
+  }
+  .tab-selector {
+    max-width: 100%;
+    margin-bottom: 12px;
+  }
+  .tab-btn {
+    font-size: 0.8rem;
+    padding: 6px 4px;
+    gap: 4px;
+  }
+  .key-banner {
+    margin: 24px auto;
+    padding: 20px 16px;
+  }
+}
+
 /* ── 全屏加载动画 ── */
 .app-loading-screen {
   position: fixed;

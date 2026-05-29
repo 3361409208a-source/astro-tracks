@@ -558,6 +558,9 @@ const reset = () => {
     grid-template-columns: 1fr;
     gap: 16px;
   }
+  .form-card {
+    padding: 16px;
+  }
   .bazi-details-grid {
     grid-template-columns: 1fr;
   }
@@ -565,6 +568,104 @@ const reset = () => {
     flex-direction: column;
     align-items: flex-start;
     gap: 8px;
+  }
+  .result-section {
+    padding: 16px;
+  }
+}
+
+/* iPhone 13 mini / 375px 小屏适配 */
+@media (max-width: 480px) {
+  .section-title h2 {
+    font-size: 1rem;
+  }
+  .section-title p {
+    font-size: 0.75rem;
+  }
+  .form-card {
+    padding: 14px;
+  }
+  .form-grid {
+    gap: 14px;
+    margin-bottom: 16px;
+  }
+  .form-group label {
+    font-size: 0.8rem;
+    margin-bottom: 6px;
+  }
+  .input-glass {
+    padding: 10px 12px;
+    font-size: 0.9rem;
+    min-height: 44px;
+  }
+  .date-row {
+    gap: 6px;
+  }
+  .gender-btn {
+    padding: 10px;
+    font-size: 0.85rem;
+    border-radius: 10px;
+  }
+  .btn-submit {
+    padding: 10px 16px;
+    font-size: 0.85rem;
+  }
+  .result-header {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .header-left h3 {
+    font-size: 1rem;
+  }
+  .user-meta {
+    font-size: 0.85rem;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .bazi-disk {
+    padding: 14px;
+  }
+  .bazi-text {
+    font-size: 1.1rem;
+    letter-spacing: 0.5px;
+  }
+  .wuxing-card {
+    padding: 12px;
+  }
+  .wuxing-value {
+    font-size: 0.95rem;
+  }
+  .bazi-details-grid {
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  .detail-block {
+    padding: 14px;
+  }
+  .block-title {
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+  }
+  .detail-block p {
+    font-size: 0.8rem;
+  }
+  .advice-card {
+    padding: 12px 14px;
+    gap: 10px;
+  }
+  .advice-content {
+    font-size: 0.85rem;
+  }
+  .loading-section {
+    padding: 40px 16px;
+  }
+  .loading-text {
+    font-size: 1rem;
+  }
+  .yin-yang-container {
+    font-size: 3.5rem;
+    width: 56px;
+    height: 56px;
   }
 }
 

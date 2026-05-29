@@ -560,6 +560,87 @@ const reset = () => {
   }
 }
 
+/* iPhone 13 mini / 375px 小屏适配 */
+@media (max-width: 480px) {
+  .section-title h2 {
+    font-size: 1rem;
+  }
+  .section-title p {
+    font-size: 0.75rem;
+  }
+  .input-card {
+    padding: 16px;
+  }
+  .textarea-large {
+    font-size: 0.9rem;
+  }
+  .btn-draw {
+    padding: 10px 16px;
+    font-size: 0.85rem;
+  }
+  .result-section {
+    padding: 16px;
+  }
+  .result-header {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .card-display {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding: 14px;
+  }
+  .card-timeline {
+    width: auto;
+    margin-bottom: 4px;
+  }
+  .card-visual {
+    width: 80px;
+    height: 120px;
+    margin-bottom: 6px;
+  }
+  .card-name {
+    font-size: 0.7rem;
+  }
+  .card-orientation {
+    font-size: 0.65rem;
+  }
+  .card-interpretation {
+    font-size: 0.8rem;
+    text-align: center;
+  }
+  .question-quote {
+    padding: 10px 12px;
+  }
+  .question-quote p {
+    font-size: 0.85rem;
+  }
+  .summary-text {
+    font-size: 1rem;
+    margin-bottom: 16px;
+  }
+  .guidance-card {
+    padding: 14px;
+  }
+  .guidance-card h4 {
+    font-size: 0.9rem;
+  }
+  .guidance-card p {
+    font-size: 0.85rem;
+  }
+  .loading-section,
+  .shuffling-section {
+    padding: 40px 16px;
+  }
+  .loading-text {
+    font-size: 1rem;
+  }
+  .shuffling-cards {
+    transform: scale(0.85);
+  }
+}
+
 /* 洗牌动画 */
 @keyframes shuffle {
   0%, 100% { transform: translate(0, 0) rotate(0deg); }

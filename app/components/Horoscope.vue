@@ -565,17 +565,113 @@ const reset = () => {
 @media (max-width: 640px) {
   .signs-grid {
     grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+  }
+  .sign-card {
+    min-height: 100px;
+    padding: 10px 6px 0;
+  }
+  .sign-icon {
+    width: 48px;
+    height: 48px;
   }
   .control-panel {
     flex-direction: column;
     gap: 16px;
     align-items: stretch;
+    padding: 10px 12px;
   }
   .period-selector {
     justify-content: center;
   }
   .indexes-grid {
     grid-template-columns: 1fr;
+  }
+  .result-section {
+    padding: 16px;
+  }
+}
+
+/* iPhone 13 mini / 375px 小屏适配 */
+@media (max-width: 480px) {
+  .section-title h2 {
+    font-size: 1rem;
+  }
+  .section-title p {
+    font-size: 0.75rem;
+  }
+  .signs-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 4px;
+  }
+  .sign-card {
+    min-height: 88px;
+    padding: 8px 4px 0;
+    border-radius: 8px;
+  }
+  .sign-icon {
+    width: 40px;
+    height: 40px;
+  }
+  .sign-name {
+    font-size: 0.8rem;
+    margin-top: 4px;
+  }
+  .sign-date {
+    font-size: 0.6rem;
+    margin-bottom: 4px;
+  }
+  .control-panel {
+    gap: 12px;
+    padding: 10px;
+  }
+  .period-btn {
+    padding: 6px 10px;
+    font-size: 0.8rem;
+    border-radius: 6px;
+  }
+  .btn-predict {
+    width: 100%;
+    padding: 10px 16px;
+  }
+  .result-header {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .sign-symbol {
+    font-size: 1.8rem;
+  }
+  .sign-badge h3 {
+    font-size: 1.05rem;
+  }
+  .summary-text {
+    font-size: 1rem;
+    margin-bottom: 16px;
+  }
+  .indexes-grid {
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+  .index-item {
+    padding: 10px;
+    border-radius: 10px;
+  }
+  .lucky-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+  .lucky-card {
+    padding: 12px;
+  }
+  .details-card {
+    padding: 14px;
+  }
+  .details-card h4 {
+    font-size: 0.9rem;
+  }
+  .details-card p {
+    font-size: 0.85rem;
   }
 }
 
