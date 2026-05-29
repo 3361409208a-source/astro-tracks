@@ -182,10 +182,13 @@ const clearConfig = () => {
 .modal-content {
   width: 100%;
   max-width: 460px;
+  max-height: calc(100vh - 40px);
   background: rgba(12, 12, 22, 0.9);
   border: 1px solid rgba(255, 255, 255, 0.07);
   border-radius: 18px;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
 .modal-header {
@@ -194,6 +197,7 @@ const clearConfig = () => {
   justify-content: space-between;
   padding: 18px 20px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  flex-shrink: 0;
 }
 
 .header-title {
@@ -229,6 +233,9 @@ const clearConfig = () => {
 
 .modal-body {
   padding: 18px 20px;
+  overflow-y: auto;
+  flex: 1;
+  scrollbar-width: thin;
 }
 
 /* 内置密钥状态提示 */
@@ -321,6 +328,7 @@ const clearConfig = () => {
   padding: 14px 20px;
   background: rgba(4, 4, 12, 0.3);
   border-top: 1px solid rgba(255, 255, 255, 0.05);
+  flex-shrink: 0;
 }
 
 .fade-enter-active, .fade-leave-active {
@@ -328,5 +336,32 @@ const clearConfig = () => {
 }
 .fade-enter-from, .fade-leave-to {
   opacity: 0;
+}
+
+@media (max-width: 480px) {
+  .modal-overlay {
+    padding: 12px;
+  }
+  .modal-content {
+    max-height: calc(100vh - 24px);
+    border-radius: 14px;
+  }
+  .modal-header {
+    padding: 14px 16px;
+  }
+  .modal-body {
+    padding: 14px 16px;
+  }
+  .modal-footer {
+    padding: 12px 16px;
+    gap: 8px;
+  }
+  .builtin-notice {
+    padding: 10px 12px;
+    margin-bottom: 14px;
+  }
+  .form-group {
+    margin-bottom: 12px;
+  }
 }
 </style>

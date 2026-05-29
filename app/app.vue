@@ -475,14 +475,14 @@ const onConfigSaved = () => {
 /* 页脚 */
 .app-footer {
   text-align: center;
-  padding: 12px 0 8px;
+  padding: 12px 0 calc(12px + env(safe-area-inset-bottom));
   font-size: 0.7rem;
   color: #334155;
 }
 
 @media (max-width: 640px) {
   .app-layout {
-    padding: 12px 16px;
+    padding: 12px 16px calc(24px + env(safe-area-inset-bottom));
   }
   .app-header {
     padding: 8px 14px;
